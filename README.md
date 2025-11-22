@@ -10,6 +10,15 @@ Install [uv](https://docs.astral.sh/uv/) package manager:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+Install Java (required for OpenDataLoader PDF processing):
+
+```bash
+# macOS
+brew install openjdk
+
+# Or download from https://www.oracle.com/java/technologies/downloads/
+```
+
 ## Installation
 
 Install the required dependencies:
