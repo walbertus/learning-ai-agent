@@ -23,6 +23,26 @@ npm install
 yarn install
 ```
 
+### Milvus Setup
+
+For local development, use Docker Compose to run Milvus:
+
+```bash
+docker-compose up -d
+```
+
+This will start a Milvus instance at `http://localhost:19530`. The ingester and querier tools are configured to use this endpoint.
+
+### Environment Configuration
+
+Copy the example environment file and configure it:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to set your Milvus connection settings and other configuration options.
+
 ## Installation
 
 ### Python Dependencies
@@ -52,8 +72,23 @@ npm install
 ### Other
 - `docs/` - Documentation and example files
 - `data/` - Data storage directory (vector databases, etc.)
+- `docker-compose.yml` - Docker Compose configuration for Milvus
 
 ## Usage
+
+### Start Milvus (Required for Ingester/Querier)
+
+Before running the ingester or querier, start Milvus:
+
+```bash
+docker-compose up -d
+```
+
+To stop Milvus:
+
+```bash
+docker-compose down
+```
 
 ### Run TypeScript Agent
 

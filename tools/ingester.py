@@ -4,7 +4,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_milvus import Milvus
 import os
-import pprint
 from uuid import uuid4
 
 
@@ -25,15 +24,24 @@ async def main():
     docs = loader.load()
     doc_splits = text_splitter.split_documents(docs)
 
-    db_path = "./data/milvus_example.db"
-    if os.path.exists(db_path):
-        os.remove(db_path)
+    milvus_addr = os.getenv('MILVUS_ADDR')
+    if not milvus_addr:
+        raise ValueError("MILVUS_ADDR environment variable is not set.")
+    
+    milvus_collection = os.getenv('MILVUS_COLLECTION')
+    if not milvus_collection:
+        raise ValueError("MILVUS_COLLECTION environment variable is not set.")
 
     vector_store = Milvus(
         embedding_function=embeddings,
-        connection_args={"uri": db_path},
+        collection_name=milvus_collection,
+        collection_description="Knowledge base collection",
+        connection_args={"uri": milvus_addr},
         index_params={"index_type": "FLAT", "metric_type": "L2"},
     )
+
+    # Clean up existing collection if it exists. for demo purposes.
+    vector_store.drop()
 
     uuids = [str(uuid4()) for _ in range(len(doc_splits))]
 

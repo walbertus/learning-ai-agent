@@ -60,4 +60,4 @@ uv.lock
 *.log
 
 
-data/milvus_example.db
+volumes
