@@ -1,7 +1,9 @@
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("weather")
-
+mcp = FastMCP(
+    name="weather",
+    port=8000,
+)
 
 @mcp.tool()
 async def get_weather(city: str) -> str:
@@ -16,7 +18,8 @@ async def get_weather(city: str) -> str:
 
 def main():
     # Initialize and run the server
-    mcp.run(transport="streamable-http")
+    # The server will be available at http://127.0.0.1:8000/mcp (default streamable_http_path)
+    mcp.run(transport="sse")
 
 
 if __name__ == "__main__":

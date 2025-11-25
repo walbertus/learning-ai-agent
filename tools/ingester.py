@@ -1,4 +1,4 @@
-from langchain_opendataloader_pdf import OpenDataLoaderPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 import asyncio
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
@@ -9,10 +9,9 @@ from uuid import uuid4
 
 
 async def main():
-    loader = OpenDataLoaderPDFLoader(
+    loader = PyPDFLoader(
         file_path="./docs/example.pdf",
-        format="markdown",
-        quiet=True,
+        mode="single"
     )
 
     embeddings = OllamaEmbeddings(model="embeddinggemma:latest")

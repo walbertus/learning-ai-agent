@@ -4,44 +4,79 @@ Personal repo to build AI agent. Learning technical stuff around AI agent.
 
 ## Prerequisites
 
+### Python Setup
+
 Install [uv](https://docs.astral.sh/uv/) package manager:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Install Java (required for OpenDataLoader PDF processing):
+### Node.js Setup
+
+For TypeScript/JavaScript implementation:
 
 ```bash
-# macOS
-brew install openjdk
-
-# Or download from https://www.oracle.com/java/technologies/downloads/
+# Install dependencies
+npm install
+# or
+yarn install
 ```
 
 ## Installation
 
-Install the required dependencies:
+### Python Dependencies
 
 ```bash
 uv install -r requirements.txt
 ```
 
-## Files
+### TypeScript Dependencies
 
-- `main.py` - Main AI agent implementation using LangChain with Ollama
-- `weather_server.py` - Weather MCP server using FastMCP
+```bash
+npm install
+```
+
+## Project Structure
+
+### Python Files
+- `tools/ingester.py` - Document ingestion and vector storage using Milvus
+- `tools/querier.py` - Query interface for the vector database
+- `tools/weather_server.py` - Weather MCP server using FastMCP
+
+### TypeScript Files
+- `main.ts` - TypeScript AI agent implementation using LangChain and LangGraph
+- `package.json` - Node.js dependencies and scripts
+- `tsconfig.json` - TypeScript configuration
+
+### Other
+- `docs/` - Documentation and example files
+- `data/` - Data storage directory (vector databases, etc.)
 
 ## Usage
 
-### Run the AI Agent
+### Run TypeScript Agent
 
 ```bash
-uv run main.py
+npm run dev
 ```
 
-### Run the Weather MCP Server
+### Run Python MCP Servers
+
+Start the weather server:
 
 ```bash
-uv run weather_server.py
+uv run tools/weather_server.py
+```
+
+Start the querier server:
+
+```bash
+uv run tools/querier.py
+```
+
+### Run Document Ingestion
+
+```bash
+uv run tools/ingester.py
 ```
